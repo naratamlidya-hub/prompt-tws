@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipper Prompt Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'pastel-pink': '#fdf2f8', // pink-50
+                        'rose-btn': '#e11d48',    // rose-600
+                        'rose-hover': '#be123c',  // rose-700
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-pastel-pink min-h-screen font-sans text-gray-800 antialiased p-6 flex flex-col items-center">
+
+    <header class="text-center mt-8 mb-10">
+        <h1 class="text-4xl font-extrabold text-rose-500 mb-2 tracking-tight">Prompt Generator ✨</h1>
+        <p class="text-gray-500 text-lg">Temukan ide cerita dan AU untuk ship favoritmu!</p>
+    </header>
+
+    <main class="w-full max-w-lg bg-white p-8 rounded-2xl shadow-[0_8px_30px_rgb(255,228,230,0.8)] border border-pink-100 mb-10 transition-all">
+        
+        <div class="mb-6">
+            <label class="block text-sm font-semibold text-rose-900 mb-2">Upload Visual / Moodboard (Opsional)</label>
+            <div class="relative flex flex-col items-center justify-center w-full h-40 border-2 border-pink-200 border-dashed rounded-xl cursor-pointer bg-pink-50 hover:bg-pink-100 transition-colors group overflow-hidden" id="upload-container">
+                <input type="file" id="image-upload" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
+                
+                <div id="upload-placeholder" class="flex flex-col items-center justify-center pt-5 pb-6 text-pink-400 group-hover:text-pink-500">
+                    <svg class="w-8 h-8 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                    </svg>
+                    <p class="text-sm font-medium">Klik atau seret foto ke sini</p>
+                </div>
+
+                <img id="upload-preview" src="" alt="Preview" class="hidden absolute inset-0 w-full h-full object-cover z-0 opacity-50" />
+            </div>
+        </div>
+
+        <div class="mb-5">
+            <label for="ship-select" class="block text-sm font-semibold text-rose-900 mb-2">Pilih Karakter / Ship</label>
+            <select id="ship-select" class="w-full bg-pink-50 border border-pink-200 text-gray-700 text-md rounded-xl focus:ring-rose-300 focus:border-rose-300 block p-3 outline-none transition-shadow focus:shadow-md">
+                <option value="Shinyu & Dohoon">Shinyu & Dohoon</option>
+                <option value="Dohoon & Reader">Dohoon & Reader</option>
+                <option value="Hanjin & Jihoon">Hanjin & Jihoon</option>
+                <option value="Youngjae & Kyungmin">Youngjae & Kyungmin</option>
+            </select>
+        </div>
+
+        <div class="mb-8">
+            <label for="genre-select" class="block text-sm font-semibold text-rose-900 mb-2">Pilih Genre AU</label>
+            <select id="genre-select" class="w-full bg-pink-50 border border-pink-200 text-gray-700 text-md rounded-xl focus:ring-rose-300 focus:border-rose-300 block p-3 outline-none transition-shadow focus:shadow-md">
+                <option value="Fluff">Fluff 🌸</option>
+                <option value="Angst">Angst 🌧️</option>
+                <option value="Coffee Shop AU">Coffee Shop AU ☕</option>
+                <option value="Enemies to Lovers">Enemies to Lovers ⚔️</option>
+                <option value="School AU">School AU 🎒</option>
+            </select>
+        </div>
+
+        <button id="generate-btn" class="w-full bg-rose-btn hover:bg-rose-hover text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-rose-200 transition-all transform active:scale-95 text-lg flex justify-center items-center gap-2">
+            Acak Prompt ✨
+        </button>
+    </main>
+
+    <section id="result-section" class="hidden w-full max-w-2xl bg-white rounded-2xl shadow-[0_8px_30px_rgb(255,228,230,0.8)] border border-pink-100 overflow-hidden mb-12">
+        <div class="flex flex-col sm:flex-row">
+            
+            <div id="result-image-container" class="hidden sm:w-2/5 h-64 sm:h-auto overflow-hidden bg-pink-50">
+                <img id="result-image" src="" alt="Moodboard" class="w-full h-full object-cover">
+            </div>
+
+            <div class="p-8 flex-1 flex flex-col justify-center">
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span id="badge-ship" class="bg-rose-100 text-rose-700 text-xs font-bold px-3 py-1 rounded-full border border-rose-200"></span>
+                    <span id="badge-genre" class="bg-pink-100 text-pink-700 text-xs font-bold px-3 py-1 rounded-full border border-pink-200"></span>
+                </div>
+                
+                <h3 class="text-xl font-bold text-rose-900 mb-3">Skenario:</h3>
+                <p id="prompt-text" class="text-gray-600 leading-relaxed italic text-md">
+                    </p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Data Dummy Prompt (3 variasi per genre)
+        const promptsData = {
+            "Fluff": [
+                "Mereka tak sengaja bertabrakan di lorong, menjatuhkan tumpukan barang yang dibawa. Saat merapikan bersama, punggung tangan mereka bersentuhan, membuat rona merah menjalar di pipi keduanya. Hari itu berakhir dengan senyum malu-malu dan langkah yang tak lagi terburu-buru.",
+                "Cuaca sangat dingin hari ini, dan dia lupa membawa syal. Tanpa banyak bicara, sosok di sebelahnya melepas syal tebalnya dan melilitkannya dengan lembut ke lehernya. Sebuah genggaman tangan hangat di dalam saku mantel menjadi pelengkap sempurna malam itu.",
+                "Menghabiskan minggu sore di sofa sambil menonton film kartun kesukaan terdengar biasa saja. Namun ketika kepala yang satu bersandar nyaman di bahu yang lain hingga tertidur, dunia tiba-tiba terasa begitu tenang dan utuh. Tidak ada tempat lain yang lebih baik dari ini."
+            ],
+            "Angst": [
+                "Hujan turun deras menutupi air mata yang tak bisa lagi ditahan. Ia menatap kepergian sosok itu dengan dada sesak, menyadari bahwa beberapa kisah memang tak ditakdirkan untuk memiliki akhir bahagia. Kalimat 'selamat tinggal' terakhir itu terus menggemar, menghancurkan sisa-sisa harapannya.",
+                "Ia menatap tiket konser yang dibelinya dengan susah payah berbulan-bulan lalu. Kursi di sebelahnya seharusnya tidak kosong hari ini. Namun takdir berkata lain, meninggalkannya sendirian di tengah riuhnya keramaian dengan rindu yang tak akan pernah tersampaikan.",
+                "Pesan singkat itu hanya berisi satu kalimat persetujuan untuk mengakhiri semuanya. Mereka berdua sama-sama tahu bahwa mempertahankan hubungan ini hanya akan saling menyakiti. Namun anehnya, melepaskan justru terasa jauh lebih menyakitkan dari luka mana pun."
+            ],
+            "Coffee Shop AU": [
+                "Aroma kopi yang pekat menjadi latar pertemuan mereka setiap selasa sore. Pesanannya selalu sama, begitu juga senyum tipis dari balik apron sang barista. Namun hari ini, ada secarik nomor telepon manis yang sengaja dituliskan di balik gelas kopinya.",
+                "Kopinya terlalu pahit hari ini, karena sang barista magang salah menakar espresso. Saat ia memprotes, sang barista meminta maaf dengan gelagapan dan wajah memerah yang tak bisa disembunyikan. Sebagai gantinya, ia mendapat sepotong strawberry cake gratis dan sebuah perkenalan canggung.",
+                "Hujan badai membuat pelangggan terakhir itu tak bisa pulang dan terpaksa menunggu di dalam kedai yang sudah setengah tutup. Sang pemilik kedai membuatkan dua cangkir cokelat panas. Mereka akhirnya mengobrol hingga tengah malam, melupakan hujan yang perlahan mereda."
+            ],
+            "Enemies to Lovers": [
+                "Berada di satu kelompok tugas adalah mimpi buruk bagi mereka yang tak pernah berhenti berdebat. Namun saat harus menginap bersama demi mengejar deadline, pertahanan keduanya mulai runtuh. Tatapan tajam itu kini perlahan berubah menjadi debaran aneh yang sulit diabaikan.",
+                "Kalah dalam taruhan konyol membuat mereka harus berpura-pura pacaran selama seminggu penuh. Awalnya semua hanya sandiwara penuh keterpaksaan dan saling ejek. Tapi ketika tangan mereka bertautan di depan umum, keduanya sadar ada batas tipis antara kepura-puraan dan perasaan nyata.",
+                "Ia selalu membenci tetangga apartemennya yang berisik setiap malam minggu. Suatu malam ia menggedor pintu berniat memarahi, namun malah menemukan musuh bebuyutannya itu sedang menangis sendirian. Caci maki yang sudah disiapkan seketika tertahan di ujung lidah."
+            ],
+            "School AU": [
+                "Masa orientasi sekolah terasa sangat membosankan sampai dia melihat senyum cerah dari ketua klub fotografi. Sebuah jepretan kamera diam-diam menjadi awal mula kedekatan mereka di bawah pohon rindang sekolah. Siapa sangka, sebuah foto candid akan mengubah seluruh masa remajanya.",
+                "Ia selalu tertidur di perpustakaan pada jam istirahat. Namun anehnya, setiap kali ia terbangun, selalu ada sekotak susu stroberi dan note kecil berisi semangat di atas mejanya. Hari ini, ia memutuskan untuk pura-pura tidur demi menangkap basah siapa pengagum rahasianya.",
+                "Keduanya adalah murid berprestasi yang selalu bersaing memperebutkan peringkat pertama di mading sekolah. Namun saat ujian akhir semakin dekat, mereka diam-diam sepakat bertemu di atap sekolah untuk belajar bersama. Persaingan nilai perlahan berubah menjadi debar jantung yang tak wajar."
+            ]
+        };
+
+        // DOM Elements
+        const imageUpload = document.getElementById('image-upload');
+        const uploadPreview = document.getElementById('upload-preview');
+        const generateBtn = document.getElementById('generate-btn');
+        const shipSelect = document.getElementById('ship-select');
+        const genreSelect = document.getElementById('genre-select');
+        
+        const resultSection = document.getElementById('result-section');
+        const resultImageContainer = document.getElementById('result-image-container');
+        const resultImage = document.getElementById('result-image');
+        const badgeShip = document.getElementById('badge-ship');
+        const badgeGenre = document.getElementById('badge-genre');
+        const promptText = document.getElementById('prompt-text');
+
+        let currentImageUrl = null;
+
+        // Handle File Upload & Preview menggunakan File API
+        imageUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    currentImageUrl = event.target.result;
+                    uploadPreview.src = currentImageUrl;
+                    uploadPreview.classList.remove('hidden');
+                    uploadPreview.classList.add('block');
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Handle Generate Button Click
+        generateBtn.addEventListener('click', function() {
+            // Ambil value dari dropdown
+            const selectedShip = shipSelect.value;
+            const selectedGenreLabel = genreSelect.options[genreSelect.selectedIndex].text;
+            const selectedGenreValue = genreSelect.value;
+
+            // Ambil prompt acak
+            const genrePrompts = promptsData[selectedGenreValue];
+            const randomIndex = Math.floor(Math.random() * genrePrompts.length);
+            // Replace kata ganti secara spesifik (opsional) agar lebih personal
+            let finalPrompt = genrePrompts[randomIndex];
+            
+            // Render ke Result Section
+            badgeShip.innerText = "❤️ " + selectedShip;
+            badgeGenre.innerText = selectedGenreLabel;
+            promptText.innerText = `"${finalPrompt}"`;
+
+            // Handle Gambar di Result
+            if (currentImageUrl) {
+                resultImage.src = currentImageUrl;
+                resultImageContainer.classList.remove('hidden');
+                resultImageContainer.classList.add('block'); // Tampilkan gambar di card
+            } else {
+                resultImageContainer.classList.add('hidden');
+                resultImageContainer.classList.remove('block');
+            }
+
+            // Tampilkan Result Card dengan efek transisi
+            resultSection.classList.remove('hidden');
+            resultSection.classList.add('flex');
+            
+            // Scroll sedikit ke bawah agar hasil terlihat
+            setTimeout(() => {
+                resultSection.scrollIntoView({ behavior: 'smooth', block: 'end' });
+            }, 100);
+        });
+    </script>
+</body>
+</html>
