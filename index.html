@@ -10,9 +10,9 @@
             theme: {
                 extend: {
                     colors: {
-                        'pastel-pink': '#fdf2f8', // pink-50
-                        'rose-btn': '#e11d48',    // rose-600
-                        'rose-hover': '#be123c',  // rose-700
+                        'pastel-pink': '#fdf2f8',
+                        'rose-btn': '#e11d48',
+                        'rose-hover': '#be123c',
                     }
                 }
             }
@@ -22,8 +22,8 @@
 <body class="bg-pastel-pink min-h-screen font-sans text-gray-800 antialiased p-6 flex flex-col items-center">
 
     <header class="text-center mt-8 mb-10">
-        <h1 class="text-4xl font-extrabold text-rose-500 mb-2 tracking-tight">Prompt Generator ✨</h1>
-        <p class="text-gray-500 text-lg">Temukan ide cerita dan AU untuk ship favoritmu!</p>
+        <h1 class="text-4xl font-extrabold text-rose-500 mb-2 tracking-tight">Prompt Generator</h1>
+        <p class="text-gray-500 text-lg">Temukan ide cerita dan alternate universe untuk ship pilihanmu.</p>
     </header>
 
     <main class="w-full max-w-lg bg-white p-8 rounded-2xl shadow-[0_8px_30px_rgb(255,228,230,0.8)] border border-pink-100 mb-10 transition-all">
@@ -48,25 +48,43 @@
             <label for="ship-select" class="block text-sm font-semibold text-rose-900 mb-2">Pilih Karakter / Ship</label>
             <select id="ship-select" class="w-full bg-pink-50 border border-pink-200 text-gray-700 text-md rounded-xl focus:ring-rose-300 focus:border-rose-300 block p-3 outline-none transition-shadow focus:shadow-md">
                 <option value="Shinyu & Dohoon">Shinyu & Dohoon</option>
-                <option value="Dohoon & Reader">Dohoon & Reader</option>
-                <option value="Hanjin & Jihoon">Hanjin & Jihoon</option>
+                <option value="Shinyu & Youngjae">Shinyu & Youngjae</option>
+                <option value="Shinyu & Jihoon">Shinyu & Jihoon</option>
+                <option value="Shinyu & Hanjin">Shinyu & Hanjin</option>
+                <option value="Shinyu & Kyungmin">Shinyu & Kyungmin</option>
+                
+                <option value="Dohoon & Youngjae">Dohoon & Youngjae</option>
+                <option value="Dohoon & Jihoon">Dohoon & Jihoon</option>
+                <option value="Dohoon & Hanjin">Dohoon & Hanjin</option>
+                <option value="Dohoon & Kyungmin">Dohoon & Kyungmin</option>
+                
+                <option value="Youngjae & Jihoon">Youngjae & Jihoon</option>
+                <option value="Youngjae & Hanjin">Youngjae & Hanjin</option>
                 <option value="Youngjae & Kyungmin">Youngjae & Kyungmin</option>
+                
+                <option value="Jihoon & Hanjin">Jihoon & Hanjin</option>
+                <option value="Jihoon & Kyungmin">Jihoon & Kyungmin</option>
+                
+                <option value="Hanjin & Kyungmin">Hanjin & Kyungmin</option>
             </select>
         </div>
 
         <div class="mb-8">
             <label for="genre-select" class="block text-sm font-semibold text-rose-900 mb-2">Pilih Genre AU</label>
             <select id="genre-select" class="w-full bg-pink-50 border border-pink-200 text-gray-700 text-md rounded-xl focus:ring-rose-300 focus:border-rose-300 block p-3 outline-none transition-shadow focus:shadow-md">
-                <option value="Fluff">Fluff 🌸</option>
-                <option value="Angst">Angst 🌧️</option>
-                <option value="Coffee Shop AU">Coffee Shop AU ☕</option>
-                <option value="Enemies to Lovers">Enemies to Lovers ⚔️</option>
-                <option value="School AU">School AU 🎒</option>
+                <option value="Fluff">Fluff</option>
+                <option value="Angst">Angst</option>
+                <option value="Coffee Shop AU">Coffee Shop AU</option>
+                <option value="Enemies to Lovers">Enemies to Lovers</option>
+                <option value="School AU">School AU</option>
+                <option value="Office Worker AU">Office Worker AU</option>
+                <option value="Fake Dating">Fake Dating</option>
+                <option value="Soulmate AU">Soulmate AU</option>
             </select>
         </div>
 
         <button id="generate-btn" class="w-full bg-rose-btn hover:bg-rose-hover text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-rose-200 transition-all transform active:scale-95 text-lg flex justify-center items-center gap-2">
-            Acak Prompt ✨
+            Acak Prompt
         </button>
     </main>
 
@@ -85,42 +103,55 @@
                 
                 <h3 class="text-xl font-bold text-rose-900 mb-3">Skenario:</h3>
                 <p id="prompt-text" class="text-gray-600 leading-relaxed italic text-md">
-                    </p>
+                </p>
             </div>
         </div>
     </section>
 
     <script>
-        // Data Dummy Prompt (3 variasi per genre)
         const promptsData = {
             "Fluff": [
-                "Mereka tak sengaja bertabrakan di lorong, menjatuhkan tumpukan barang yang dibawa. Saat merapikan bersama, punggung tangan mereka bersentuhan, membuat rona merah menjalar di pipi keduanya. Hari itu berakhir dengan senyum malu-malu dan langkah yang tak lagi terburu-buru.",
-                "Cuaca sangat dingin hari ini, dan dia lupa membawa syal. Tanpa banyak bicara, sosok di sebelahnya melepas syal tebalnya dan melilitkannya dengan lembut ke lehernya. Sebuah genggaman tangan hangat di dalam saku mantel menjadi pelengkap sempurna malam itu.",
-                "Menghabiskan minggu sore di sofa sambil menonton film kartun kesukaan terdengar biasa saja. Namun ketika kepala yang satu bersandar nyaman di bahu yang lain hingga tertidur, dunia tiba-tiba terasa begitu tenang dan utuh. Tidak ada tempat lain yang lebih baik dari ini."
+                "Mereka tak sengaja bertabrakan di lorong, menjatuhkan tumpukan barang yang dibawa. Saat merapikan bersama, punggung tangan mereka bersentuhan, membuat rona merah menjalar di pipi keduanya. Hari itu berakhir dengan senyum dan langkah yang tenang.",
+                "Cuaca sangat dingin hari ini, dan salah satu dari mereka lupa membawa syal. Tanpa banyak bicara, sosok di sebelahnya melepas syal tebalnya dan melilitkannya dengan lembut ke leher pasangannya. Genggaman tangan hangat di saku mantel menjadi pelengkap malam itu.",
+                "Menghabiskan minggu sore di sofa sambil menonton film kesukaan terdengar biasa saja. Namun ketika kepala yang satu bersandar nyaman di bahu yang lain hingga tertidur, dunia tiba-tiba terasa begitu tenang dan utuh."
             ],
             "Angst": [
-                "Hujan turun deras menutupi air mata yang tak bisa lagi ditahan. Ia menatap kepergian sosok itu dengan dada sesak, menyadari bahwa beberapa kisah memang tak ditakdirkan untuk memiliki akhir bahagia. Kalimat 'selamat tinggal' terakhir itu terus menggemar, menghancurkan sisa-sisa harapannya.",
-                "Ia menatap tiket konser yang dibelinya dengan susah payah berbulan-bulan lalu. Kursi di sebelahnya seharusnya tidak kosong hari ini. Namun takdir berkata lain, meninggalkannya sendirian di tengah riuhnya keramaian dengan rindu yang tak akan pernah tersampaikan.",
-                "Pesan singkat itu hanya berisi satu kalimat persetujuan untuk mengakhiri semuanya. Mereka berdua sama-sama tahu bahwa mempertahankan hubungan ini hanya akan saling menyakiti. Namun anehnya, melepaskan justru terasa jauh lebih menyakitkan dari luka mana pun."
+                "Hujan turun deras menutupi air mata yang tak bisa lagi ditahan. Ia menatap kepergian sosok itu dengan dada sesak, menyadari bahwa beberapa kisah memang tak ditakdirkan untuk memiliki akhir bahagia. Kalimat perpisahan terakhir itu terus terngiang di kepala.",
+                "Ia menatap tiket konser yang dibelinya dengan susah payah berbulan-bulan lalu. Kursi di sebelahnya seharusnya tidak kosong hari ini. Namun takdir berkata lain, meninggalkannya sendirian di tengah riuhnya keramaian.",
+                "Pesan singkat itu hanya berisi satu kalimat persetujuan untuk mengakhiri semuanya. Mereka berdua sama-sama tahu bahwa mempertahankan hubungan ini hanya akan saling menyakiti, meski melepaskan terasa jauh lebih berat."
             ],
             "Coffee Shop AU": [
-                "Aroma kopi yang pekat menjadi latar pertemuan mereka setiap selasa sore. Pesanannya selalu sama, begitu juga senyum tipis dari balik apron sang barista. Namun hari ini, ada secarik nomor telepon manis yang sengaja dituliskan di balik gelas kopinya.",
-                "Kopinya terlalu pahit hari ini, karena sang barista magang salah menakar espresso. Saat ia memprotes, sang barista meminta maaf dengan gelagapan dan wajah memerah yang tak bisa disembunyikan. Sebagai gantinya, ia mendapat sepotong strawberry cake gratis dan sebuah perkenalan canggung.",
-                "Hujan badai membuat pelangggan terakhir itu tak bisa pulang dan terpaksa menunggu di dalam kedai yang sudah setengah tutup. Sang pemilik kedai membuatkan dua cangkir cokelat panas. Mereka akhirnya mengobrol hingga tengah malam, melupakan hujan yang perlahan mereda."
+                "Aroma kopi yang pekat menjadi latar pertemuan mereka setiap selasa sore. Pesanannya selalu sama, begitu juga senyum tipis dari balik apron sang barista. Hari ini, ada secarik nomor telepon yang sengaja dituliskan di balik gelas kopinya.",
+                "Kopinya terasa terlalu pahit karena sang barista magang salah menakar takaran espresso. Saat ia memprotes, sang barista meminta maaf dengan wajah memerah. Sebagai gantinya, ia mendapat sepotong kue gratis dan perkenalan canggung.",
+                "Hujan badai membuat pelanggan terakhir itu tak bisa pulang dan terpaksa menunggu di dalam kedai yang sudah setengah tutup. Pemilik kedai membuatkan dua cangkir cokelat panas, berujung obrolan panjang hingga tengah malam."
             ],
             "Enemies to Lovers": [
-                "Berada di satu kelompok tugas adalah mimpi buruk bagi mereka yang tak pernah berhenti berdebat. Namun saat harus menginap bersama demi mengejar deadline, pertahanan keduanya mulai runtuh. Tatapan tajam itu kini perlahan berubah menjadi debaran aneh yang sulit diabaikan.",
-                "Kalah dalam taruhan konyol membuat mereka harus berpura-pura pacaran selama seminggu penuh. Awalnya semua hanya sandiwara penuh keterpaksaan dan saling ejek. Tapi ketika tangan mereka bertautan di depan umum, keduanya sadar ada batas tipis antara kepura-puraan dan perasaan nyata.",
-                "Ia selalu membenci tetangga apartemennya yang berisik setiap malam minggu. Suatu malam ia menggedor pintu berniat memarahi, namun malah menemukan musuh bebuyutannya itu sedang menangis sendirian. Caci maki yang sudah disiapkan seketika tertahan di ujung lidah."
+                "Berada di satu kelompok tugas adalah mimpi buruk bagi mereka yang tak pernah berhenti berdebat. Namun saat harus menginap bersama demi mengejar tenggat waktu, pertahanan keduanya mulai runtuh secara perlahan.",
+                "Kalah dalam taruhan konyol membuat mereka harus berpura-pura menjadi pasangan selama seminggu penuh. Awalnya semua hanya sandiwara penuh keterpaksaan, tapi ketika tangan mereka bertautan di depan umum, batas antara pura-pura dan nyata mulai kabur.",
+                "Ia selalu membenci tetangga apartemennya yang berisik setiap akhir pekan. Suatu malam ia menggedor pintu berniat memarahi, namun malah menemukan musuh bebuyutannya itu sedang menghadapi masalah besar."
             ],
             "School AU": [
-                "Masa orientasi sekolah terasa sangat membosankan sampai dia melihat senyum cerah dari ketua klub fotografi. Sebuah jepretan kamera diam-diam menjadi awal mula kedekatan mereka di bawah pohon rindang sekolah. Siapa sangka, sebuah foto candid akan mengubah seluruh masa remajanya.",
-                "Ia selalu tertidur di perpustakaan pada jam istirahat. Namun anehnya, setiap kali ia terbangun, selalu ada sekotak susu stroberi dan note kecil berisi semangat di atas mejanya. Hari ini, ia memutuskan untuk pura-pura tidur demi menangkap basah siapa pengagum rahasianya.",
-                "Keduanya adalah murid berprestasi yang selalu bersaing memperebutkan peringkat pertama di mading sekolah. Namun saat ujian akhir semakin dekat, mereka diam-diam sepakat bertemu di atap sekolah untuk belajar bersama. Persaingan nilai perlahan berubah menjadi debar jantung yang tak wajar."
+                "Masa orientasi sekolah terasa sangat membosankan sampai ia melihat senyum cerah dari ketua klub fotografi. Jepretan kamera diam-diam menjadi awal mula kedekatan mereka di bawah pohon rindang sekolah.",
+                "Ia selalu tertidur di perpustakaan pada jam istirahat. Setiap kali terbangun, selalu ada sekotak susu dan catatan kecil berisi semangat di atas mejanya. Hari ini, ia memutuskan pura-pura tidur demi menangkap basah pengagum rahasianya.",
+                "Keduanya adalah murid berprestasi yang selalu bersaing memperebutkan peringkat pertama. Saat ujian akhir semakin dekat, mereka diam-diam sepakat bertemu di atap sekolah untuk belajar bersama."
+            ],
+            "Office Worker AU": [
+                "Terjebak di dalam lift kantor yang rusak selama dua jam memaksa dua rekan kerja yang selama ini jarang akur untuk saling terbuka membicarakan tekanan hidup dan impian rahasia mereka.",
+                "Sebagai asisten manajer yang perfeksionis, ia selalu dibuat pusing oleh atasannya yang santai namun brilian. Di balik meja kantor yang kaku, dokumen laporan sering diselipi catatan kecil yang bernada usil.",
+                "Lembur hingga larut malam di gedung perkantoran yang kosong menyisakan mereka berdua di lantai tiga. Secangkir kopi hangat dari mesin otomatis menjadi awal dari percikan rasa yang tak terduga."
+            ],
+            "Fake Dating": [
+                "Demi menghindari perjodohan keluarga yang melelahkan, mereka sepakat membuat kontrak hubungan palsu. Aturan utamanya sederhana: jangan sampai baper. Sialnya, aturan itu justru mulai dilanggar sejak hari ketiga.",
+                "Tampil bersama di acara reuni sebagai pasangan sukses mengelabui semua orang. Namun di perjalanan pulang dalam taksi yang sunyi, keheningan di antara mereka terasa jauh lebih intens daripada sandiwara tadi.",
+                "Sebuah foto tidak sengaja tertangkap kamera paparazzi dan langsung menjadi berita utama nasional. Alih-alih membantah, mereka memutuskan melanjutkan sandiwara romantis ini demi kepentingan bersama."
+            ],
+            "Soulmate AU": [
+                "Di dunia ini, warna dunia akan menjadi nyata hanya ketika kamu menyentuh soulmate-mu untuk pertama kali. Selama bertahun-tahun ia hidup dalam dunia hitam putih, hingga tak sengaja bahunya bersenggolan dengan seseorang di stasiun.",
+                "Setiap kata yang diucapkan soulmate-mu akan muncul sebagai tulisan di kulit lenganmu. Hari ini, lengan kirinya tiba-tiba terasa hangat saat sebuah kalimat sapaan tercetak di sana, ditulis oleh seseorang di kota yang sama.",
+                "Tanda jam pasir di pergelangan tangan terus menghitung mundur detik-detik pertemuan dengan soulmate. Ketika jarum penunjuk waktunya habis, pintu kafe tempatnya bekerja terbuka dan sesosok figur familiar melangkah masuk."
             ]
         };
 
-        // DOM Elements
         const imageUpload = document.getElementById('image-upload');
         const uploadPreview = document.getElementById('upload-preview');
         const generateBtn = document.getElementById('generate-btn');
@@ -136,7 +167,6 @@
 
         let currentImageUrl = null;
 
-        // Handle File Upload & Preview menggunakan File API
         imageUpload.addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
@@ -151,39 +181,31 @@
             }
         });
 
-        // Handle Generate Button Click
         generateBtn.addEventListener('click', function() {
-            // Ambil value dari dropdown
             const selectedShip = shipSelect.value;
             const selectedGenreLabel = genreSelect.options[genreSelect.selectedIndex].text;
             const selectedGenreValue = genreSelect.value;
 
-            // Ambil prompt acak
             const genrePrompts = promptsData[selectedGenreValue];
             const randomIndex = Math.floor(Math.random() * genrePrompts.length);
-            // Replace kata ganti secara spesifik (opsional) agar lebih personal
             let finalPrompt = genrePrompts[randomIndex];
             
-            // Render ke Result Section
-            badgeShip.innerText = "❤️ " + selectedShip;
+            badgeShip.innerText = selectedShip;
             badgeGenre.innerText = selectedGenreLabel;
             promptText.innerText = `"${finalPrompt}"`;
 
-            // Handle Gambar di Result
             if (currentImageUrl) {
                 resultImage.src = currentImageUrl;
                 resultImageContainer.classList.remove('hidden');
-                resultImageContainer.classList.add('block'); // Tampilkan gambar di card
+                resultImageContainer.classList.add('block');
             } else {
                 resultImageContainer.classList.add('hidden');
                 resultImageContainer.classList.remove('block');
             }
 
-            // Tampilkan Result Card dengan efek transisi
             resultSection.classList.remove('hidden');
             resultSection.classList.add('flex');
             
-            // Scroll sedikit ke bawah agar hasil terlihat
             setTimeout(() => {
                 resultSection.scrollIntoView({ behavior: 'smooth', block: 'end' });
             }, 100);
