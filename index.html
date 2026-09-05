@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,13 +23,13 @@
 
     <header class="text-center mt-8 mb-10">
         <h1 class="text-4xl font-extrabold text-rose-500 mb-2 tracking-tight">Prompt Generator</h1>
-        <p class="text-gray-500 text-lg">Temukan ide cerita dan alternate universe untuk ship pilihanmu.</p>
+        <p class="text-gray-500 text-lg">Discover story ideas and alternate universes for your favorite ship.</p>
     </header>
 
     <main class="w-full max-w-lg bg-white p-8 rounded-2xl shadow-[0_8px_30px_rgb(255,228,230,0.8)] border border-pink-100 mb-10 transition-all">
         
         <div class="mb-6">
-            <label class="block text-sm font-semibold text-rose-900 mb-2">Upload Visual / Moodboard (Opsional)</label>
+            <label class="block text-sm font-semibold text-rose-900 mb-2">Upload Visual / Moodboard (Optional)</label>
             <div class="relative flex flex-col items-center justify-center w-full h-40 border-2 border-pink-200 border-dashed rounded-xl cursor-pointer bg-pink-50 hover:bg-pink-100 transition-colors group overflow-hidden" id="upload-container">
                 <input type="file" id="image-upload" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
                 
@@ -37,7 +37,7 @@
                     <svg class="w-8 h-8 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                     </svg>
-                    <p class="text-sm font-medium">Klik atau seret foto ke sini</p>
+                    <p class="text-sm font-medium">Click or drag an image here</p>
                 </div>
 
                 <img id="upload-preview" src="" alt="Preview" class="hidden absolute inset-0 w-full h-full object-cover z-0 opacity-50" />
@@ -45,7 +45,7 @@
         </div>
 
         <div class="mb-5">
-            <label for="ship-select" class="block text-sm font-semibold text-rose-900 mb-2">Pilih Karakter / Ship</label>
+            <label for="ship-select" class="block text-sm font-semibold text-rose-900 mb-2">Select Character / Ship</label>
             <select id="ship-select" class="w-full bg-pink-50 border border-pink-200 text-gray-700 text-md rounded-xl focus:ring-rose-300 focus:border-rose-300 block p-3 outline-none transition-shadow focus:shadow-md">
                 <option value="Shinyu & Dohoon">Shinyu & Dohoon</option>
                 <option value="Shinyu & Youngjae">Shinyu & Youngjae</option>
@@ -70,7 +70,7 @@
         </div>
 
         <div class="mb-8">
-            <label for="genre-select" class="block text-sm font-semibold text-rose-900 mb-2">Pilih Genre AU</label>
+            <label for="genre-select" class="block text-sm font-semibold text-rose-900 mb-2">Select Genre AU</label>
             <select id="genre-select" class="w-full bg-pink-50 border border-pink-200 text-gray-700 text-md rounded-xl focus:ring-rose-300 focus:border-rose-300 block p-3 outline-none transition-shadow focus:shadow-md">
                 <option value="Fluff">Fluff</option>
                 <option value="Angst">Angst</option>
@@ -84,7 +84,7 @@
         </div>
 
         <button id="generate-btn" class="w-full bg-rose-btn hover:bg-rose-hover text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-rose-200 transition-all transform active:scale-95 text-lg flex justify-center items-center gap-2">
-            Acak Prompt
+            Generate Prompt
         </button>
     </main>
 
@@ -101,7 +101,7 @@
                     <span id="badge-genre" class="bg-pink-100 text-pink-700 text-xs font-bold px-3 py-1 rounded-full border border-pink-200"></span>
                 </div>
                 
-                <h3 class="text-xl font-bold text-rose-900 mb-3">Skenario:</h3>
+                <h3 class="text-xl font-bold text-rose-900 mb-3">Scenario:</h3>
                 <p id="prompt-text" class="text-gray-600 leading-relaxed italic text-md">
                 </p>
             </div>
@@ -111,44 +111,60 @@
     <script>
         const promptsData = {
             "Fluff": [
-                "Mereka tak sengaja bertabrakan di lorong, menjatuhkan tumpukan barang yang dibawa. Saat merapikan bersama, punggung tangan mereka bersentuhan, membuat rona merah menjalar di pipi keduanya. Hari itu berakhir dengan senyum dan langkah yang tenang.",
-                "Cuaca sangat dingin hari ini, dan salah satu dari mereka lupa membawa syal. Tanpa banyak bicara, sosok di sebelahnya melepas syal tebalnya dan melilitkannya dengan lembut ke leher pasangannya. Genggaman tangan hangat di saku mantel menjadi pelengkap malam itu.",
-                "Menghabiskan minggu sore di sofa sambil menonton film kesukaan terdengar biasa saja. Namun ketika kepala yang satu bersandar nyaman di bahu yang lain hingga tertidur, dunia tiba-tiba terasa begitu tenang dan utuh."
+                "They accidentally bumped into each other in the hallway, scattering their stacked notebooks everywhere. As they reached down to pick them up, their hands brushed, sending a sudden blush across both of their cheeks.",
+                "It was freezing outside, and one of them forgot to bring a scarf. Without a word, the other unwraped their own thick scarf and gently wrapped it around the other's neck, keeping them warm through the chilly walk home.",
+                "Spending a lazy Sunday afternoon together on the couch watching cartoons sounds ordinary, but when one of them falls asleep comfortably leaning on the other's shoulder, the whole world suddenly feels entirely complete.",
+                "Sharing a single pair of earphones while walking under the falling autumn leaves, they listened to the same playlist in comfortable silence, occasionally stealing shy glances at each other.",
+                "When one of them got sick with a sudden fever, the other stayed up all night acting as a clumsy yet extremely dedicated personal nurse, bringing warm soup and medicine with a soft, worried expression."
             ],
             "Angst": [
-                "Hujan turun deras menutupi air mata yang tak bisa lagi ditahan. Ia menatap kepergian sosok itu dengan dada sesak, menyadari bahwa beberapa kisah memang tak ditakdirkan untuk memiliki akhir bahagia. Kalimat perpisahan terakhir itu terus terngiang di kepala.",
-                "Ia menatap tiket konser yang dibelinya dengan susah payah berbulan-bulan lalu. Kursi di sebelahnya seharusnya tidak kosong hari ini. Namun takdir berkata lain, meninggalkannya sendirian di tengah riuhnya keramaian.",
-                "Pesan singkat itu hanya berisi satu kalimat persetujuan untuk mengakhiri semuanya. Mereka berdua sama-sama tahu bahwa mempertahankan hubungan ini hanya akan saling menyakiti, meski melepaskan terasa jauh lebih berat."
+                "Heavy rain poured down, masking the tears they refused to let fall. Standing under the dim streetlamp, one watched the other walk away, realizing some stories are simply not meant to have a happy ending.",
+                "Holding a concert ticket bought with months of hard effort, one stared at the empty seat next to them. Fate had other plans, leaving them alone in the roaring crowd with unexpressed words stuck in their throat.",
+                "The text message was short, containing only a mutual agreement to let go. They both knew holding on any longer would only cause more damage, though the parting itself felt heavier than any physical wound.",
+                "They stood on opposite sides of the platform as the train doors closed, separating their lives forever with a silent glass barrier and eyes full of unspoken apologies.",
+                "Finding an old polaroid picture tucked inside a textbook brought back a flood of memories from a time when they used to mean everything to each other, before everything turned into cold strangers."
             ],
             "Coffee Shop AU": [
-                "Aroma kopi yang pekat menjadi latar pertemuan mereka setiap selasa sore. Pesanannya selalu sama, begitu juga senyum tipis dari balik apron sang barista. Hari ini, ada secarik nomor telepon yang sengaja dituliskan di balik gelas kopinya.",
-                "Kopinya terasa terlalu pahit karena sang barista magang salah menakar takaran espresso. Saat ia memprotes, sang barista meminta maaf dengan wajah memerah. Sebagai gantinya, ia mendapat sepotong kue gratis dan perkenalan canggung.",
-                "Hujan badai membuat pelanggan terakhir itu tak bisa pulang dan terpaksa menunggu di dalam kedai yang sudah setengah tutup. Pemilik kedai membuatkan dua cangkir cokelat panas, berujung obrolan panjang hingga tengah malam."
+                "The rich aroma of roasted coffee beans marked their meeting every Tuesday afternoon. The order was always the same, just like the quiet smile from behind the counter, until today when a sweet phone number was written on the cup sleeve.",
+                "The iced americano tasted far too bitter because the rookie barista messed up the espresso ratio. When complained, the barista panicked with flushed cheeks, offering a free strawberry cake and an awkward introduction.",
+                "A sudden thunderstorm trapped the last customer inside the closing cafe. The owner brewed two cups of hot chocolate, leading to a late-night conversation that made them forget the bad weather outside.",
+                "Drawing funny little doodles on every paper coffee cup became a secret game between the regular customer and the barista, until one day a reply was written back in marker.",
+                "Working the closing shift alone, they spilled coffee all over the counter, bursting into helpless laughter that instantly broke the rigid professional barrier between them."
             ],
             "Enemies to Lovers": [
-                "Berada di satu kelompok tugas adalah mimpi buruk bagi mereka yang tak pernah berhenti berdebat. Namun saat harus menginap bersama demi mengejar tenggat waktu, pertahanan keduanya mulai runtuh secara perlahan.",
-                "Kalah dalam taruhan konyol membuat mereka harus berpura-pura menjadi pasangan selama seminggu penuh. Awalnya semua hanya sandiwara penuh keterpaksaan, tapi ketika tangan mereka bertautan di depan umum, batas antara pura-pura dan nyata mulai kabur.",
-                "Ia selalu membenci tetangga apartemennya yang berisik setiap akhir pekan. Suatu malam ia menggedor pintu berniat memarahi, namun malah menemukan musuh bebuyutannya itu sedang menghadapi masalah besar."
+                "Being paired up for a major group project felt like a nightmare for two people who never stopped arguing. Yet, staying up late together to meet the deadline slowly broke down their defensive walls.",
+                "A foolish lost bet forced them to pretend to be a couple for a whole week. What started as awkward acting and constant teasing slowly turned blurred as their hands naturally intertwined in public.",
+                "Tired of the loud noises coming from the next apartment unit every weekend, one marched over to complain, only to find their ultimate campus rival struggling through a personal emergency.",
+                "They were fierce competitors running against each other for student council president, but getting locked inside the storage room overnight forced them to actually listen to each other's hidden vulnerabilities.",
+                "Constantly exchanging sarcastic remarks in class, they never expected to find themselves sharing midnight snacks on the school rooftop while talking about their deepest fears."
             ],
             "School AU": [
-                "Masa orientasi sekolah terasa sangat membosankan sampai ia melihat senyum cerah dari ketua klub fotografi. Jepretan kamera diam-diam menjadi awal mula kedekatan mereka di bawah pohon rindang sekolah.",
-                "Ia selalu tertidur di perpustakaan pada jam istirahat. Setiap kali terbangun, selalu ada sekotak susu dan catatan kecil berisi semangat di atas mejanya. Hari ini, ia memutuskan pura-pura tidur demi menangkap basah pengagum rahasianya.",
-                "Keduanya adalah murid berprestasi yang selalu bersaing memperebutkan peringkat pertama. Saat ujian akhir semakin dekat, mereka diam-diam sepakat bertemu di atap sekolah untuk belajar bersama."
+                "High school orientation felt utterly boring until spotting the bright smile of the photography club president. A candid snapshot taken from afar marked the beginning of countless moments under the shady school trees.",
+                "Falling asleep in the library during lunch break always resulted in finding a cold strawberry milk and a sticky note with words of encouragement left on the desk. Today, they decided to fake sleep to catch the secret admirer.",
+                "As top academic rivals always fighting for the first rank on the board, they secretly agreed to meet up at the school rooftop for late-night study sessions, turning grade competition into fast-beating heartbeats.",
+                "Being assigned as partners for detention duty sounded like a punishment, but sharing a single box of snacks on the dusty floor made the hours pass by far too quickly.",
+                "During a sudden school power outage, one of them reached out in the dark and accidentally grabbed the other's hand, refusing to let go even after the lights came back on."
             ],
             "Office Worker AU": [
-                "Terjebak di dalam lift kantor yang rusak selama dua jam memaksa dua rekan kerja yang selama ini jarang akur untuk saling terbuka membicarakan tekanan hidup dan impian rahasia mereka.",
-                "Sebagai asisten manajer yang perfeksionis, ia selalu dibuat pusing oleh atasannya yang santai namun brilian. Di balik meja kantor yang kaku, dokumen laporan sering diselipi catatan kecil yang bernada usil.",
-                "Lembur hingga larut malam di gedung perkantoran yang kosong menyisakan mereka berdua di lantai tiga. Secangkir kopi hangat dari mesin otomatis menjadi awal dari percikan rasa yang tak terduga."
+                "Getting trapped inside a broken office elevator for two hours forced two coworkers who rarely got along to finally open up about their real life pressures and secret career ambitions.",
+                "As a perfectionist junior manager, they were constantly annoyed by their seemingly laid-back yet brilliant senior. Behind stiff corporate reports, sticky notes with playful remarks were frequently slipped.",
+                "Working overtime in an empty corporate building left just the two of them on the fourteenth floor. Warm coffee from the vending machine sparked a conversation that changed their working dynamic completely.",
+                "A stressful corporate trip out of town required them to share a single hotel room with only one bed, turning a professional assignment into an awkward night of quiet realizations.",
+                "When a major client presentation failed, they stayed back late to fix the slides together, sharing takeout food on the office floor while whispering words of mutual comfort."
             ],
             "Fake Dating": [
-                "Demi menghindari perjodohan keluarga yang melelahkan, mereka sepakat membuat kontrak hubungan palsu. Aturan utamanya sederhana: jangan sampai baper. Sialnya, aturan itu justru mulai dilanggar sejak hari ketiga.",
-                "Tampil bersama di acara reuni sebagai pasangan sukses mengelabui semua orang. Namun di perjalanan pulang dalam taksi yang sunyi, keheningan di antara mereka terasa jauh lebih intens daripada sandiwara tadi.",
-                "Sebuah foto tidak sengaja tertangkap kamera paparazzi dan langsung menjadi berita utama nasional. Alih-alih membantah, mereka memutuskan melanjutkan sandiwara romantis ini demi kepentingan bersama."
+                "To escape exhausting family blind dates, they agreed to sign a fake dating contract. The primary rule was simple: do not catch feelings. Naturally, that rule began breaking down by the third day.",
+                "Attending a high school reunion as a successful power couple managed to fool everyone in attendance. However, on the quiet taxi ride home, the silence felt far more intense than the act itself.",
+                "A casual photo captured by a passing reporter turned them into nationwide trending news. Instead of issuing immediate denials, they decided to extend the romantic charade for mutual benefit.",
+                "Playing lovers for a friend's wedding weekend seemed harmless, but slow dancing under the fairy lights made the fake scenario feel dangerously close to reality.",
+                "They practiced their kissing scene for a local theater project backstage, only to realize neither of them wanted to pull away when the director shouted cut."
             ],
             "Soulmate AU": [
-                "Di dunia ini, warna dunia akan menjadi nyata hanya ketika kamu menyentuh soulmate-mu untuk pertama kali. Selama bertahun-tahun ia hidup dalam dunia hitam putih, hingga tak sengaja bahunya bersenggolan dengan seseorang di stasiun.",
-                "Setiap kata yang diucapkan soulmate-mu akan muncul sebagai tulisan di kulit lenganmu. Hari ini, lengan kirinya tiba-tiba terasa hangat saat sebuah kalimat sapaan tercetak di sana, ditulis oleh seseorang di kota yang sama.",
-                "Tanda jam pasir di pergelangan tangan terus menghitung mundur detik-detik pertemuan dengan soulmate. Ketika jarum penunjuk waktunya habis, pintu kafe tempatnya bekerja terbuka dan sesosok figur familiar melangkah masuk."
+                "In this world, colors only appear once you touch your soulmate for the very first time. Having lived in a monochromatic world for years, their vision suddenly burst into color when their shoulders brushed in the subway.",
+                "Whatever your soulmate speaks appears as ink writing on your skin. One morning, a warm sensation spread across their forearm as a casual greeting was printed there by someone living in the same city.",
+                "An hourglass timer tattooed on their wrist counted down the exact seconds until meeting their soulmate. As the final seconds ticked away, the cafe door flew open and a familiar figure walked right inside.",
+                "Soulmates share physical pain, meaning one of them kept randomly stumbling or getting paper cuts while sitting quietly at home, knowing their clumsy counterpart was miles away getting into trouble.",
+                "In a society where everyone can hear their soulmate's voice inside their head at age eighteen, they spent years trying to locate the owner of the soft, comforting singing voice keeping them company at night."
             ]
         };
 
